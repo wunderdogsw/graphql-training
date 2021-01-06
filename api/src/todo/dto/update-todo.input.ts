@@ -1,8 +1,10 @@
 import { CreateTodoInput } from './create-todo.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { InputType, Field, Int, PickType } from '@nestjs/graphql';
 
 @InputType()
-export class UpdateTodoInput extends PartialType(CreateTodoInput) {
-  @Field(() => Int)
+export class UpdateTodoInput extends PickType(CreateTodoInput, [
+  'description',
+]) {
+  @Field(() => Int!)
   id: number;
 }

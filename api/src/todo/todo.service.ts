@@ -1,26 +1,41 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTodoInput } from './dto/create-todo.input';
 import { UpdateTodoInput } from './dto/update-todo.input';
+import { Todo } from './entities/todo.entity';
 
 @Injectable()
 export class TodoService {
-  create(createTodoInput: CreateTodoInput) {
-    return 'This action adds a new todo';
+  todos: Todo[] = [];
+
+  async create(createTodoInput: CreateTodoInput): Promise<Todo> {
+    const id =
+      (this.todos
+        .map((t) => t.id)
+        .sort((a, b) => b - a)
+        .find(() => true) ?? 0) + 1;
+    this.todos.push({
+      ...createTodoInput,
+      id,
+    });
+    return this.findOne(id);
   }
 
-  findAll() {
-    return `This action returns all todo`;
+  async findAll(): Promise<Todo[]> {
+    return this.todos;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} todo`;
+  async findOne(id: number): Promise<Todo> {
+    return this.todos.find((t) => t.id === id);
   }
 
-  update(id: number, updateTodoInput: UpdateTodoInput) {
-    return `This action updates a #${id} todo`;
+  async update(id: number, updateTodoInput: UpdateTodoInput): Promise<Todo> {
+    const updated = await this.findOne(id);
+    updated.description = updateTodoInput.description;
+    return updated;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} todo`;
+  async remove(id: number): Promise<number> {
+    this.todos = this.todos.filter((t) => t.id !== id);
+    return id;
   }
 }
