@@ -13,13 +13,13 @@ export class TodoResolver {
     return this.todoService.create(createTodoInput);
   }
 
-  @Query(() => [Todo], { name: 'todo' })
-  findAll() {
+  @Query(() => [Todo])
+  todos() {
     return this.todoService.findAll();
   }
 
-  @Query(() => Todo, { name: 'todo' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  @Query(() => Todo)
+  todo(@Args('id', { type: () => Int }) id: number) {
     return this.todoService.findOne(id);
   }
 
@@ -28,7 +28,7 @@ export class TodoResolver {
     return this.todoService.update(updateTodoInput.id, updateTodoInput);
   }
 
-  @Mutation(() => Todo)
+  @Mutation(() => Int)
   removeTodo(@Args('id', { type: () => Int }) id: number) {
     return this.todoService.remove(id);
   }
