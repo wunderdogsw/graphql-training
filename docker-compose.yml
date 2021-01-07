@@ -6,7 +6,24 @@ services:
       target: builder
     command: yarn start:dev
     restart: on-failure
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: postgresdb
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: onlyfordev
     volumes:
       - ./api:/usr/src/app
     ports:
       - '8000:8000'
+  db:
+    image: postgres:13-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: postgresdb
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: onlyfordev
+    volumes:
+      - ./data/sql-data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
