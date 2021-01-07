@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  api:
+    build:
+      context: ./api
+      target: builder
+    command: yarn start:dev
+    restart: on-failure
+    volumes:
+      - ./api:/usr/src/app
+    ports:
+      - '8000:8000'
