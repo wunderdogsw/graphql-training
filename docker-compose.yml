@@ -1,5 +1,17 @@
 version: '3.7'
 services:
+  web:
+    build: ./web
+    command: yarn start
+    restart: on-failure
+    environment:
+      REACT_APP_LOCAL: local
+    volumes:
+      - ./web:/usr/src/app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - api
   api:
     build:
       context: ./api
