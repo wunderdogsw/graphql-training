@@ -1,9 +1,12 @@
+import { ApolloProvider } from '@apollo/client';
 import React from 'react';
+import { client } from './client';
+import Todo from './components/Todo/Todo';
 
-function App() {
-  return (
-      <p>Content</p>
-  );
-}
+const App: React.FC = () => (
+  <ApolloProvider client={client}>
+    <Todo />
+  </ApolloProvider>
+);
 
 export default App;
