@@ -1,26 +1,8 @@
 import React from 'react';
-import { useQuery, gql } from '@apollo/client';
-
-type TodoItem = {
-  id: number;
-  description: string;
-};
-
-type Data = {
-  todos: TodoItem[];
-};
-
-const TODO_QUERY = gql`
-  query {
-    todos {
-      id
-      description
-    }
-  }
-`;
+import { useTodosQuery } from '../../types/generated-types-and-hooks';
 
 const Todo: React.FC = () => {
-  const { loading, error, data } = useQuery<Data>(TODO_QUERY);
+  const { loading, error, data } = useTodosQuery();
 
   if (loading) return <p>Loading...</p>;
   if (error || !data?.todos) return <p>Error!</p>;
