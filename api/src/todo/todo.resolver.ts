@@ -9,27 +9,31 @@ export class TodoResolver {
   constructor(private readonly todoService: TodoService) {}
 
   @Mutation(() => Todo)
-  createTodo(@Args('createTodoInput') createTodoInput: CreateTodoInput) {
+  createTodo(
+    @Args('createTodoInput') createTodoInput: CreateTodoInput,
+  ): Promise<Todo> {
     return this.todoService.create(createTodoInput);
   }
 
   @Query(() => [Todo])
-  todos() {
+  todos(): Promise<Todo[]> {
     return this.todoService.findAll();
   }
 
   @Query(() => Todo)
-  todo(@Args('id', { type: () => Int }) id: number) {
+  todo(@Args('id', { type: () => Int }) id: number): Promise<Todo> {
     return this.todoService.findOne(id);
   }
 
   @Mutation(() => Todo)
-  updateTodo(@Args('updateTodoInput') updateTodoInput: UpdateTodoInput) {
+  updateTodo(
+    @Args('updateTodoInput') updateTodoInput: UpdateTodoInput,
+  ): Promise<Todo> {
     return this.todoService.update(updateTodoInput.id, updateTodoInput);
   }
 
   @Mutation(() => Int)
-  removeTodo(@Args('id', { type: () => Int }) id: number) {
+  removeTodo(@Args('id', { type: () => Int }) id: number): Promise<number> {
     return this.todoService.remove(id);
   }
 }
