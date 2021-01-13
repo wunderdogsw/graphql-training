@@ -427,7 +427,7 @@ yarn start
 
 ## Dockerise
 
-Add `/graphql-training/web/Dockerfile` (can be improved, but his will suffice for now)
+Add `/graphql-training/web/Dockerfile` (this will suffice for now)
 
 ```plaintext
 FROM node:14-alpine
@@ -437,6 +437,8 @@ COPY yarn.lock ./
 RUN yarn
 COPY . .
 ```
+
+---
 
 Update `/graphql-training/docker-compose.yml`
 
@@ -546,13 +548,13 @@ export default App;
 ```
 
 ---
+
 ## Install graphql-codegen and plugins
 
 > Context: `/graphql-training/web`
 
 ```plaintext
 yarn add --dev @graphql-codegen/cli @graphql-codegen/typescript @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo @graphql-codegen/typescript-apollo-client-helpers
-
 ```
 
 Add graphql-codegen configuration: `/graphql-training/web/codegen.yml`:
@@ -569,7 +571,10 @@ generates:
       - typescript-react-apollo
       - typescript-apollo-client-helpers
 ```
-Move listing query to own file `/graphql-training/web/operations/todo/list.graphql`:
+
+---
+
+Create listing query to own file `/graphql-training/web/src/operations/todo/list.graphql`:
 
 ```graphql
 query Todos {
@@ -602,6 +607,8 @@ yarn generate
 
 This generates the types and hooks automatically based on what the API responds. (That's why the API must be running.) Now we can use the generated types and hooks directly in the components!
 
+---
+
 Modify `/graphql-training/web/src/components/Todo/Todo.tsx`:
 
 ```typescript
@@ -628,6 +635,7 @@ const Todo: React.FC = () => {
 export default Todo;
 ```
 
+---
 
 # Bonus: Using Marp to create slides
 
