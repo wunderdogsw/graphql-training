@@ -1,3 +1,10 @@
+---
+marp: true
+theme: default
+class: invert
+size: 16:9
+---
+
 # Working with NestJS and ApolloClient for a seamless GraphQL and TypeScript development experience
 
 During this course we will briefly go through these subjects:
@@ -6,7 +13,7 @@ During this course we will briefly go through these subjects:
 - set up GraphQL web client using create-react-app and ApolloClient
 - tie everything together with Docker, docker-compose and graphql-code-generator for a seamless local development experience
 
-In the end we will have everything set up in such a way that code-changes in the backend will automatically update types and hooks used by the frontend components. This will make the development experience between frontend and backend development not only seamless and easy but also validated.
+In the end we will have everything set up in such a way that code-changes in the backend will automatically update types and hooks used by the frontend components. This will make the development experience between frontend and backend development seamless and easy.
 
 ---
 
@@ -22,21 +29,22 @@ In the end we will have everything set up in such a way that code-changes in the
 
 # Prerequisites
 
-Tools used (feel free to use equivalent alternatives):
+Tools used:
 
 - Docker
-- VSCode
-- Insomnia
+- a terminal
+- a text editor (or IDE)
+- a browser
+
+Make sure you have these installed and configured before starting the course.
+
+---
 
 Knowledge of the following subjects is beneficial, although not required:
 
 - Node
 - React
 - TypeScript
-- Docker
-
-Basic knowledge of the following subjects is beneficial, although definitely not required:
-
 - yarn (feel free to use npm+npx instead)
 - NestJS (this will be used to get us started quickly and avoid dealing with Express)
 - TypeORM (this will be used to avoid dealing with SQL)
@@ -46,19 +54,33 @@ The main focus will be on these:
 - GraphQL
 - ApolloClient
 
+---
+
+# How this course works
+
+- each step in this course is documented as a separate commit that can be accessed by viewing the associated pull request:
+  - [API][api]
+  - [CLIENT][client]
+- the slides will go through each step and present how some the code changes can be created with command line tools
+- some slides will contain a context quote to help keep tract the expected state of the terminal:
+
+> Context: `/graphql-training/api && yarn start`
+
+[api]: https://github.com/wunderdogsw/graphql-training/pull/1/commits
+[client]: https://github.com/wunderdogsw/graphql-training/pull/2/commits
 
 ---
 # API
 
 ## Install Nest and create simple API
 
-Install NestJS globally
+Install [NestJS CLI][nestjscli] globally
 
 ```plaintext
 yarn global add @nestjs/cli
 ```
 
-https://docs.nestjs.com/cli/overview
+[nestjscli]: [https://docs.nestjs.com/cli/overview]
 
 Initialise the project and create the API
 
@@ -66,26 +88,32 @@ Initialise the project and create the API
 mkdir graphql-training
 cd graphql-training
 git init
+```
+
+- Choose `yarn` in the following step: 
+
+```plaintext
 nest new api
 ```
 
-- Choose `yarn`
 
-Start the API
+---
+
+## Start the API
+
+> Context: `/graphql-training/api`
 
 ```plaintext
-cd api
-yarn
 yarn start:dev
 ```
 
-Open Insomnia (or browser) and GET https://localhost:3000 
+Open browser at http://localhost:3000 
 
 ---
 
 ## Create simple GraphQL API
 
-Context: `/graphql-training/api`
+> Context: `/graphql-training/api`
 
 Add GraphQL to the API
 
@@ -133,9 +161,9 @@ export class AppModule {}
 
 ## First GraphQL query
 
-Context: `/graphql-training/api && yarn start:dev`
+> Context: `/graphql-training/api && yarn start:dev`
 
-Open Insomnia (or browser) and POST > GraphQL query to https://localhost:3000/graphql
+Open browser to access playground: http://localhost:3000/graphql
 
 ```graphql
 query {
@@ -151,12 +179,30 @@ This will result in an error, since the default resolver is not ready (and also 
 
 ## Fix resolver and implement service
 
-Make changes. See related commit for details: "API: Update todo models and service to return sane results"
+> Context: `/graphql-training/api && yarn start:dev`
 
-- note that schema.graphql is automatically updated (code first configuration!)
-- GraphQL APIs document themselves and the documentation is available in the playground
+Make changes:
+- `/src/todo/dto/create-todo.input.ts`
+- `/src/todo/dto/update-todo.input.ts`
+- `/src/todo/entities/todo.entity.ts`
+- `/src/todo/todo.resolver.ts`
+- `/src/todo/todo.service.ts`
+
+Observe that:
+-  `/src/schema.graphql` is automatically updated (code first configuration)
+- the documentation is available in the playground
+
+See commit: [API: Update todo models and service to return sane results][1]
+
+[1]: https://github.com/wunderdogsw/graphql-training/pull/1/commits/5e40ee33c0b744726aef6163670c54720ca43bcc
+
+
+
+---
 
 Create mutation:
+
+> Context: `/graphql-training/api && yarn start:dev`
 
 ```graphql
 mutation {
@@ -170,6 +216,10 @@ mutation {
 ```
 
 - observe when trying to input something bad => GRAPHQL_VALIDATION_FAILED!
+
+---
+
+> Context: `/graphql-training/api && yarn start:dev`
 
 Query all: 
 
@@ -198,6 +248,8 @@ COPY . .
 RUN yarn build
 ```
 
+---
+
 Add `/graphql-training/docker-compose.yml`:
 
 ```yaml
@@ -216,6 +268,8 @@ services:
 
 ```
 
+---
+
 Change port in `/graphql-training/api/src/main.ts`:
 
 ```typescript
@@ -231,7 +285,7 @@ async function bootstrap() {
 bootstrap();
 ```
 
-Context: `/graphql-training`
+> Context: `/graphql-training`
 
 ```plaintext
 docker-compose up
@@ -244,13 +298,13 @@ docker-compose down
 
 ## Add TypeORM and PostgreSQL database
 
-Context: `/graphql-training/api`
-
-Add packages
+> Context: `/graphql-training/api`
 
 ```plaintext
 yarn add @nestjs/typeorm typeorm pg
 ```
+
+---
 
 TypeORM requires some changes to tsconfig.json (esModuleInterop and moduleResolution):
 ```json
@@ -302,7 +356,7 @@ export default config;
 
 ---
 
-### Add PostgreSQL database: Add docker configuration 
+### Add PostgreSQL database: Add docker configuration for db
 
 Update: `/graphql-training/docker-compose.yml`:
 
@@ -341,13 +395,26 @@ services:
 
 ## Use db to store todo items permanently
 
-See commit "API: Use db to store todo items"
+
+> Context: `/graphql-training/api/src`
+
+Make changes:
+- `/app.module.ts`: add TypeORM configuration
+- `/todo/entities/todo.entity.ts`: add TypeORM decorators
+- `/todo/todo.module.ts`: Todo configuration
+  - this enables using `@InjectRepository(Todo)`
+- `/todo/todo.resolver.ts`
+- `/todo/todo.service.ts`: Use `Repository<Todo>` to communicate with db
+
+See commit [API: Use db to store todo items][9]
+
+[9]: https://github.com/wunderdogsw/graphql-training/pull/1/commits/601b579fc840bbd2043cbc5954b372797481b96e
 
 ---
 
-# UI
+# Client
 
-Context: `/graphql-training`
+> Context: `/graphql-training`
 
 ```plaintext
 yarn create react-app web --template typescript
@@ -397,7 +464,7 @@ services:
 
 ## Install GraphQL and Apollo Client
 
-Context: `/graphql-training/web`
+> Context: `/graphql-training/web`
 
 ```plaintext
 yarn add graphql @apollo/client
@@ -481,7 +548,7 @@ export default App;
 ---
 ## Install graphql-codegen and plugins
 
-Context: `/graphql-training/web`
+> Context: `/graphql-training/web`
 
 ```plaintext
 yarn add --dev @graphql-codegen/cli @graphql-codegen/typescript @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo @graphql-codegen/typescript-apollo-client-helpers
@@ -527,7 +594,7 @@ Change `/graphql-training/web/package.json`:
 }
 ```
 
-Context: `/graphql-training && docker-compose up -d && cd web`
+> Context: `/graphql-training && docker-compose up -d && cd web`
 
 ```plaintext
 yarn generate
