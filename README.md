@@ -64,15 +64,18 @@ The main focus will be on these:
 - the slides will go through each step and present how some the code changes can be created with command line tools
 - some slides will contain a context quote to help keep tract the expected state of the terminal:
 
-> Context: `/graphql-training/api && yarn start`
+> Context: `/graphql-training && docker-compose up -d`
 
 [api]: https://github.com/wunderdogsw/graphql-training/pull/1/commits
 [client]: https://github.com/wunderdogsw/graphql-training/pull/2/commits
 
 ---
-# API
 
-## Install Nest and create simple API
+# Preassignment
+
+---
+
+## Install Nest
 
 Install [NestJS CLI][nestjscli] globally
 
@@ -82,32 +85,63 @@ yarn global add @nestjs/cli
 
 [nestjscli]: [https://docs.nestjs.com/cli/overview]
 
-Initialise the project and create the API
+Clone the repo and checkout code in the `starter` branch:
 
 ```plaintext
-mkdir graphql-training
+git clone https://github.com/wunderdogsw/graphql-training.git
 cd graphql-training
-git init
+git checkout starter
+git checkout -b local
 ```
 
-- Choose `yarn` in the following step: 
+---
+
+Create an API using [NestJS][nestjs]:
 
 ```plaintext
-nest new api
+nest new api --package-manager yarn
+```
+
+Create a web app using [CRA][cra]:
+
+```plaintext
+yarn create react-app web --template typescript
 ```
 
 
 ---
 
-## Start the API
-
-> Context: `/graphql-training/api`
+Use the configuration provided in `docker-compose.yml` to start the API, the web app and the DB:
 
 ```plaintext
-yarn start:dev
+docker-compose up -d
 ```
 
-Open browser at http://localhost:3000 
+[nestjs]: https://docs.nestjs.com/
+[cra]: https://create-react-app.dev/docs/getting-started/
+
+Check that the API works at http://localhost:8000
+
+Check that the web app works at http://localhost:3000
+
+Feel free to also check that the DB works at http://localhost:5432 
+
+
+Troubleshooting and shutdown:
+```plaintext
+docker ps
+docker-compose logs api
+docker-compose logs web
+docker-compose logs db
+docker-compose down
+```
+---
+
+# API
+
+> Context: `/graphql-training && docker-compose up -d`
+
+Check that the API works at http://localhost:8000
 
 ---
 
@@ -161,7 +195,7 @@ export class AppModule {}
 
 ## First GraphQL query
 
-> Context: `/graphql-training/api && yarn start:dev`
+> Context: `/graphql-training && docker-compose up -d`
 
 Open browser to access playground: http://localhost:3000/graphql
 
@@ -179,7 +213,7 @@ This will result in an error, since the default resolver is not ready (and also 
 
 ## Fix resolver and implement service
 
-> Context: `/graphql-training/api && yarn start:dev`
+> Context: `/graphql-training && docker-compose up -d`
 
 Make changes:
 - `/src/todo/dto/create-todo.input.ts`
@@ -200,9 +234,11 @@ See commit: [API: Update todo models and service to return sane results][1]
 
 ---
 
-Create mutation:
+### Test that GraphQL API works
 
-> Context: `/graphql-training/api && yarn start:dev`
+> Context: `/graphql-training && docker-compose up -d`
+
+Create mutation:
 
 ```graphql
 mutation {
@@ -219,7 +255,7 @@ mutation {
 
 ---
 
-> Context: `/graphql-training/api && yarn start:dev`
+> Context: `/graphql-training && docker-compose up -d`
 
 Query all: 
 
@@ -234,68 +270,6 @@ query {
 
 ---
 
-## Add Docker
-
-Add `/graphql-training/api/Dockerfile`:
-
-```docker
-FROM node:14-alpine as builder
-WORKDIR /usr/src/app
-COPY package.json ./
-COPY yarn.lock ./
-RUN yarn --only=development
-COPY . .
-RUN yarn build
-```
-
----
-
-Add `/graphql-training/docker-compose.yml`:
-
-```yaml
-version: '3.7'
-services:
-  api:
-    build:
-      context: ./api
-      target: builder
-    command: yarn start:dev
-    restart: on-failure
-    volumes:
-      - ./api:/usr/src/app
-    ports:
-      - '8000:8000'
-
-```
-
----
-
-Change port in `/graphql-training/api/src/main.ts`:
-
-```typescript
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-
-const port = 8000;
-
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(port);
-}
-bootstrap();
-```
-
-> Context: `/graphql-training`
-
-```plaintext
-docker-compose up
-docker-compose up -d
-docker-compose logs api
-docker-compose down
-```
-
----
-
 ## Add TypeORM and PostgreSQL database
 
 > Context: `/graphql-training/api`
@@ -304,23 +278,12 @@ docker-compose down
 yarn add @nestjs/typeorm typeorm pg
 ```
 
----
 
-TypeORM requires some changes to tsconfig.json (esModuleInterop and moduleResolution):
+TypeORM requires some changes to `/graphql-training/api/tsconfig.json`:
 ```json
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "es2017",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
+    // Leave previous options as they were
     "esModuleInterop": true,
     "moduleResolution": "node"
   }
@@ -356,45 +319,7 @@ export default config;
 
 ---
 
-### Add PostgreSQL database: Add docker configuration for db
-
-Update: `/graphql-training/docker-compose.yml`:
-
-```yaml
-version: '3.7'
-services:
-  api:
-    build:
-      context: ./api
-      target: builder
-    command: yarn start:dev
-    restart: on-failure
-    environment:
-      POSTGRES_HOST: db
-      POSTGRES_PORT: 5432
-      POSTGRES_DB: postgresdb
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: onlyfordev
-    volumes:
-      - ./api:/usr/src/app
-    ports:
-      - '8000:8000'
-  db:
-    image: postgres:13-alpine
-    restart: always
-    environment:
-      POSTGRES_DB: postgresdb
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: onlyfordev
-    volumes:
-      - ./data/sql-data:/var/lib/postgresql/data
-    ports:
-      - '5432:5432'
-```
----
-
 ## Use db to store todo items permanently
-
 
 > Context: `/graphql-training/api/src`
 
@@ -412,56 +337,19 @@ See commit [API: Use db to store todo items][9]
 
 ---
 
+Feel free to check data in DB to check that everything is configured properly at this stage. See `/graphql-training/docker-compose.yml` for details on DB configuration.
+
+---
+
 # Client
 
-> Context: `/graphql-training`
+> Context: `/graphql-training && docker-compose up -d`
 
-```plaintext
-yarn create react-app web --template typescript
-cd web
-yarn start
-```
+Check that the web app works at http://localhost:3000
+
+
 
 - clean up generated code at will
----
-
-## Dockerise
-
-Add `/graphql-training/web/Dockerfile` (this will suffice for now)
-
-```plaintext
-FROM node:14-alpine
-WORKDIR /usr/src/app
-COPY package.json ./
-COPY yarn.lock ./
-RUN yarn
-COPY . .
-```
-
----
-
-Update `/graphql-training/docker-compose.yml`
-
-```yaml
-version: '3.7'
-services:
-  web:
-    build: ./web
-    command: yarn start
-    restart: on-failure
-    environment:
-      REACT_APP_LOCAL: local
-    volumes:
-      - ./web:/usr/src/app
-    ports:
-      - '3000:3000'
-    depends_on:
-      - api
-  api:
-    ...
-  db:
-    ...
-```
 ---
 
 ## Install GraphQL and Apollo Client
@@ -530,7 +418,7 @@ export default Todo;
 ```
 ---
 
-Change `/graphql-training/web/src/App.txs`:
+Change `/graphql-training/web/src/App.tsx`:
 
 ```typescript
 import { ApolloProvider } from '@apollo/client';
@@ -574,7 +462,7 @@ generates:
 
 ---
 
-Create listing query to own file `/graphql-training/web/src/operations/todo/list.graphql`:
+Create `/graphql-training/web/src/operations/todo/list.graphql` for listing query:
 
 ```graphql
 query Todos {
@@ -588,11 +476,9 @@ query Todos {
 Change `/graphql-training/web/package.json`:
 ```json
 {
+  // Leave other options as they were
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    // Leave other scripts as they were
     "generate": "graphql-codegen",
     "generate:watch": "graphql-codegen --watch"
   }
@@ -652,15 +538,10 @@ Modify `/graphql-training/slides/package.json`:
 
 ```json
 {
-  "name": "slides",
-  "version": "1.0.0",
-  "license": "MIT",
+  // Leave other options as they were
   "scripts": {
     "slides": "marp '../README.md' -o slides.html",
     "slides:watch": "marp '../README.md' -o slides.html --watch"
-  },
-  "devDependencies": {
-    "@marp-team/marp-cli": "^0.23.0"
   }
 }
 ```

@@ -68,36 +68,55 @@
 <li>some slides will contain a context quote to help keep tract the expected state of the terminal:</li>
 </ul>
 <blockquote>
-<p>Context: <code>/graphql-training/api &amp;&amp; yarn start</code></p>
+<p>Context: <code>/graphql-training &amp;&amp; docker-compose up -d</code></p>
 </blockquote>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="6" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
-<h1>API</h1>
-<h2>Install Nest and create simple API</h2>
+<h1>Preassignment</h1>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="7" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+<h2>Install Nest</h2>
 <p>Install <a href="%5Bhttps://docs.nestjs.com/cli/overview%5D">NestJS CLI</a> globally</p>
 <pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>yarn global add @nestjs/cli
 </span></span></foreignObject></svg></code></pre>
-<p>Initialise the project and create the API</p>
-<pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>mkdir graphql-training
+<p>Clone the repo and checkout code in the <code>starter</code> branch:</p>
+<pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>git clone https://github.com/wunderdogsw/graphql-training.git
 cd graphql-training
-git init
+git checkout starter
+git checkout -b local
 </span></span></foreignObject></svg></code></pre>
-<ul>
-<li>Choose <code>yarn</code> in the following step:</li>
-</ul>
-<pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>nest new api
-</span></span></foreignObject></svg></code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="7" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
-<h2>Start the API</h2>
-<blockquote>
-<p>Context: <code>/graphql-training/api</code></p>
-</blockquote>
-<pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>yarn start:dev
-</span></span></foreignObject></svg></code></pre>
-<p>Open browser at <a href="http://localhost:3000">http://localhost:3000</a></p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+<p>Create an API using <a href="https://docs.nestjs.com/">NestJS</a>:</p>
+<pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>nest new api --package-manager yarn
+</span></span></foreignObject></svg></code></pre>
+<p>Create a web app using <a href="https://create-react-app.dev/docs/getting-started/">CRA</a>:</p>
+<pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>yarn create react-app web --template typescript
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+<p>Use the configuration provided in <code>docker-compose.yml</code> to start the API, the web app and the DB:</p>
+<pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>docker-compose up -d
+</span></span></foreignObject></svg></code></pre>
+<p>Check that the API works at <a href="http://localhost:8000">http://localhost:8000</a></p>
+<p>Check that the web app works at <a href="http://localhost:3000">http://localhost:3000</a></p>
+<p>Feel free to also check that the DB works at <a href="http://localhost:5432">http://localhost:5432</a></p>
+<p>Troubleshooting and shutdown:</p>
+<pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>docker ps
+docker-compose logs api
+docker-compose logs web
+docker-compose logs db
+docker-compose down
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+<h1>API</h1>
+<blockquote>
+<p>Context: <code>/graphql-training &amp;&amp; docker-compose up -d</code></p>
+</blockquote>
+<p>Check that the API works at <a href="http://localhost:8000">http://localhost:8000</a></p>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <h2>Create simple GraphQL API</h2>
 <blockquote>
 <p>Context: <code>/graphql-training/api</code></p>
@@ -113,7 +132,7 @@ git init
 <li>Choose <code>Y</code> for CRUD</li>
 </ul>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="12" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <h2>Configure GraphQL in NestJS (code-first)</h2>
 <p>Modify <code>/graphql-training/api/src/app.module.ts</code></p>
 <pre><code class="language-typescript"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">import</span> { Module } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span>;
@@ -137,10 +156,10 @@ git init
 <span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppModule</span> </span>{}
 </span></span></foreignObject></svg></code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="13" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <h2>First GraphQL query</h2>
 <blockquote>
-<p>Context: <code>/graphql-training/api &amp;&amp; yarn start:dev</code></p>
+<p>Context: <code>/graphql-training &amp;&amp; docker-compose up -d</code></p>
 </blockquote>
 <p>Open browser to access playground: <a href="http://localhost:3000/graphql">http://localhost:3000/graphql</a></p>
 <pre><code class="language-graphql"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>query {
@@ -151,10 +170,10 @@ git init
 </span></span></foreignObject></svg></code></pre>
 <p>This will result in an error, since the default resolver is not ready (and also there is no data).</p>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="14" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <h2>Fix resolver and implement service</h2>
 <blockquote>
-<p>Context: <code>/graphql-training/api &amp;&amp; yarn start:dev</code></p>
+<p>Context: <code>/graphql-training &amp;&amp; docker-compose up -d</code></p>
 </blockquote>
 <p>Make changes:</p>
 <ul>
@@ -171,11 +190,12 @@ git init
 </ul>
 <p>See commit: <a href="https://github.com/wunderdogsw/graphql-training/pull/1/commits/5e40ee33c0b744726aef6163670c54720ca43bcc">API: Update todo models and service to return sane results</a></p>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="12" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
-<p>Create mutation:</p>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="15" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+<h3>Test that GraphQL API works</h3>
 <blockquote>
-<p>Context: <code>/graphql-training/api &amp;&amp; yarn start:dev</code></p>
+<p>Context: <code>/graphql-training &amp;&amp; docker-compose up -d</code></p>
 </blockquote>
+<p>Create mutation:</p>
 <pre><code class="language-graphql"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>mutation {
   createTodo(createTodoInput: {
     description: &quot;Create todo&quot;
@@ -189,9 +209,9 @@ git init
 <li>observe when trying to input something bad =&gt; GRAPHQL_VALIDATION_FAILED!</li>
 </ul>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="13" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="16" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <blockquote>
-<p>Context: <code>/graphql-training/api &amp;&amp; yarn start:dev</code></p>
+<p>Context: <code>/graphql-training &amp;&amp; docker-compose up -d</code></p>
 </blockquote>
 <p>Query all:</p>
 <pre><code class="language-graphql"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>query {
@@ -202,57 +222,6 @@ git init
 }
 </span></span></foreignObject></svg></code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="14" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
-<h2>Add Docker</h2>
-<p>Add <code>/graphql-training/api/Dockerfile</code>:</p>
-<pre><code class="language-docker"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">FROM</span> node:<span class="hljs-number">14</span>-alpine as builder
-<span class="hljs-keyword">WORKDIR</span><span class="bash"> /usr/src/app</span>
-<span class="hljs-keyword">COPY</span><span class="bash"> package.json ./</span>
-<span class="hljs-keyword">COPY</span><span class="bash"> yarn.lock ./</span>
-<span class="hljs-keyword">RUN</span><span class="bash"> yarn --only=development</span>
-<span class="hljs-keyword">COPY</span><span class="bash"> . .</span>
-<span class="hljs-keyword">RUN</span><span class="bash"> yarn build</span>
-</span></span></foreignObject></svg></code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="15" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
-<p>Add <code>/graphql-training/docker-compose.yml</code>:</p>
-<pre><code class="language-yaml"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.7&#x27;</span>
-<span class="hljs-attr">services:</span>
-  <span class="hljs-attr">api:</span>
-    <span class="hljs-attr">build:</span>
-      <span class="hljs-attr">context:</span> <span class="hljs-string">./api</span>
-      <span class="hljs-attr">target:</span> <span class="hljs-string">builder</span>
-    <span class="hljs-attr">command:</span> <span class="hljs-string">yarn</span> <span class="hljs-string">start:dev</span>
-    <span class="hljs-attr">restart:</span> <span class="hljs-string">on-failure</span>
-    <span class="hljs-attr">volumes:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">./api:/usr/src/app</span>
-    <span class="hljs-attr">ports:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;8000:8000&#x27;</span>
-
-</span></span></foreignObject></svg></code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="16" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
-<p>Change port in <code>/graphql-training/api/src/main.ts</code>:</p>
-<pre><code class="language-typescript"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">import</span> { NestFactory } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/core&#x27;</span>;
-<span class="hljs-keyword">import</span> { AppModule } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./app.module&#x27;</span>;
-
-<span class="hljs-keyword">const</span> port = <span class="hljs-number">8000</span>;
-
-<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bootstrap</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">const</span> app = <span class="hljs-keyword">await</span> NestFactory.create(AppModule);
-  <span class="hljs-keyword">await</span> app.listen(port);
-}
-bootstrap();
-</span></span></foreignObject></svg></code></pre>
-<blockquote>
-<p>Context: <code>/graphql-training</code></p>
-</blockquote>
-<pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>docker-compose up
-docker-compose up -d
-docker-compose logs api
-docker-compose down
-</span></span></foreignObject></svg></code></pre>
-</section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="17" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <h2>Add TypeORM and PostgreSQL database</h2>
 <blockquote>
@@ -260,29 +229,17 @@ docker-compose down
 </blockquote>
 <pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>yarn add @nestjs/typeorm typeorm pg
 </span></span></foreignObject></svg></code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="18" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
-<p>TypeORM requires some changes to tsconfig.json (esModuleInterop and moduleResolution):</p>
+<p>TypeORM requires some changes to <code>/graphql-training/api/tsconfig.json</code>:</p>
 <pre><code class="language-json"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>{
   <span class="hljs-attr">&quot;compilerOptions&quot;</span>: {
-    <span class="hljs-attr">&quot;module&quot;</span>: <span class="hljs-string">&quot;commonjs&quot;</span>,
-    <span class="hljs-attr">&quot;declaration&quot;</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-attr">&quot;removeComments&quot;</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-attr">&quot;emitDecoratorMetadata&quot;</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-attr">&quot;experimentalDecorators&quot;</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-attr">&quot;allowSyntheticDefaultImports&quot;</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-attr">&quot;target&quot;</span>: <span class="hljs-string">&quot;es2017&quot;</span>,
-    <span class="hljs-attr">&quot;sourceMap&quot;</span>: <span class="hljs-literal">true</span>,
-    <span class="hljs-attr">&quot;outDir&quot;</span>: <span class="hljs-string">&quot;./dist&quot;</span>,
-    <span class="hljs-attr">&quot;baseUrl&quot;</span>: <span class="hljs-string">&quot;./&quot;</span>,
-    <span class="hljs-attr">&quot;incremental&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-comment">// Leave previous options as they were</span>
     <span class="hljs-attr">&quot;esModuleInterop&quot;</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-attr">&quot;moduleResolution&quot;</span>: <span class="hljs-string">&quot;node&quot;</span>
   }
 }
 </span></span></foreignObject></svg></code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="19" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="18" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <h3>Add PostgreSQL database: Add ORM configuration</h3>
 <p>Add <code>/graphql-training/api/ormconfig.ts</code>:</p>
 <pre><code class="language-typescript"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">import</span> { join } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;path&#x27;</span>;
@@ -305,41 +262,7 @@ docker-compose down
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> config;
 </span></span></foreignObject></svg></code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="20" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
-<h3>Add PostgreSQL database: Add docker configuration for db</h3>
-<p>Update: <code>/graphql-training/docker-compose.yml</code>:</p>
-<pre><code class="language-yaml"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.7&#x27;</span>
-<span class="hljs-attr">services:</span>
-  <span class="hljs-attr">api:</span>
-    <span class="hljs-attr">build:</span>
-      <span class="hljs-attr">context:</span> <span class="hljs-string">./api</span>
-      <span class="hljs-attr">target:</span> <span class="hljs-string">builder</span>
-    <span class="hljs-attr">command:</span> <span class="hljs-string">yarn</span> <span class="hljs-string">start:dev</span>
-    <span class="hljs-attr">restart:</span> <span class="hljs-string">on-failure</span>
-    <span class="hljs-attr">environment:</span>
-      <span class="hljs-attr">POSTGRES_HOST:</span> <span class="hljs-string">db</span>
-      <span class="hljs-attr">POSTGRES_PORT:</span> <span class="hljs-number">5432</span>
-      <span class="hljs-attr">POSTGRES_DB:</span> <span class="hljs-string">postgresdb</span>
-      <span class="hljs-attr">POSTGRES_USER:</span> <span class="hljs-string">root</span>
-      <span class="hljs-attr">POSTGRES_PASSWORD:</span> <span class="hljs-string">onlyfordev</span>
-    <span class="hljs-attr">volumes:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">./api:/usr/src/app</span>
-    <span class="hljs-attr">ports:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;8000:8000&#x27;</span>
-  <span class="hljs-attr">db:</span>
-    <span class="hljs-attr">image:</span> <span class="hljs-string">postgres:13-alpine</span>
-    <span class="hljs-attr">restart:</span> <span class="hljs-string">always</span>
-    <span class="hljs-attr">environment:</span>
-      <span class="hljs-attr">POSTGRES_DB:</span> <span class="hljs-string">postgresdb</span>
-      <span class="hljs-attr">POSTGRES_USER:</span> <span class="hljs-string">root</span>
-      <span class="hljs-attr">POSTGRES_PASSWORD:</span> <span class="hljs-string">onlyfordev</span>
-    <span class="hljs-attr">volumes:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">./data/sql-data:/var/lib/postgresql/data</span>
-    <span class="hljs-attr">ports:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;5432:5432&#x27;</span>
-</span></span></foreignObject></svg></code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="21" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="19" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <h2>Use db to store todo items permanently</h2>
 <blockquote>
 <p>Context: <code>/graphql-training/api/src</code></p>
@@ -358,51 +281,20 @@ docker-compose down
 </ul>
 <p>See commit <a href="https://github.com/wunderdogsw/graphql-training/pull/1/commits/601b579fc840bbd2043cbc5954b372797481b96e">API: Use db to store todo items</a></p>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="22" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="20" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+<p>Feel free to check data in DB to check that everything is configured properly at this stage. See <code>/graphql-training/docker-compose.yml</code> for details on DB configuration.</p>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="21" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <h1>Client</h1>
 <blockquote>
-<p>Context: <code>/graphql-training</code></p>
+<p>Context: <code>/graphql-training &amp;&amp; docker-compose up -d</code></p>
 </blockquote>
-<pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>yarn create react-app web --template typescript
-cd web
-yarn start
-</span></span></foreignObject></svg></code></pre>
+<p>Check that the web app works at <a href="http://localhost:3000">http://localhost:3000</a></p>
 <ul>
 <li>clean up generated code at will</li>
 </ul>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="23" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
-<h2>Dockerise</h2>
-<p>Add <code>/graphql-training/web/Dockerfile</code> (can be improved, but his will suffice for now)</p>
-<pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>FROM node:14-alpine
-WORKDIR /usr/src/app
-COPY package.json ./
-COPY yarn.lock ./
-RUN yarn
-COPY . .
-</span></span></foreignObject></svg></code></pre>
-<p>Update <code>/graphql-training/docker-compose.yml</code></p>
-<pre><code class="language-yaml"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-attr">version:</span> <span class="hljs-string">&#x27;3.7&#x27;</span>
-<span class="hljs-attr">services:</span>
-  <span class="hljs-attr">web:</span>
-    <span class="hljs-attr">build:</span> <span class="hljs-string">./web</span>
-    <span class="hljs-attr">command:</span> <span class="hljs-string">yarn</span> <span class="hljs-string">start</span>
-    <span class="hljs-attr">restart:</span> <span class="hljs-string">on-failure</span>
-    <span class="hljs-attr">environment:</span>
-      <span class="hljs-attr">REACT_APP_LOCAL:</span> <span class="hljs-string">local</span>
-    <span class="hljs-attr">volumes:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">./web:/usr/src/app</span>
-    <span class="hljs-attr">ports:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;3000:3000&#x27;</span>
-    <span class="hljs-attr">depends_on:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-string">api</span>
-  <span class="hljs-attr">api:</span>
-    <span class="hljs-string">...</span>
-  <span class="hljs-attr">db:</span>
-    <span class="hljs-string">...</span>
-</span></span></foreignObject></svg></code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="24" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="22" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <h2>Install GraphQL and Apollo Client</h2>
 <blockquote>
 <p>Context: <code>/graphql-training/web</code></p>
@@ -418,7 +310,7 @@ COPY . .
 });
 </span></span></foreignObject></svg></code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="25" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="23" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <p>Create <code>/graphql-training/web/src/components/Todo/Todo.tsx</code></p>
 <pre><code class="language-typescript"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 <span class="hljs-keyword">import</span> { useQuery, gql } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@apollo/client&#x27;</span>;
@@ -462,8 +354,8 @@ COPY . .
 
 </span></span></foreignObject></svg></code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="26" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
-<p>Change <code>/graphql-training/web/src/App.txs</code>:</p>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="24" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+<p>Change <code>/graphql-training/web/src/App.tsx</code>:</p>
 <pre><code class="language-typescript"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">import</span> { ApolloProvider } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@apollo/client&#x27;</span>;
 <span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 <span class="hljs-keyword">import</span> { client } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./client&#x27;</span>;
@@ -478,13 +370,12 @@ COPY . .
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> App;
 </span></span></foreignObject></svg></code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="27" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="25" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <h2>Install graphql-codegen and plugins</h2>
 <blockquote>
 <p>Context: <code>/graphql-training/web</code></p>
 </blockquote>
 <pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>yarn add --dev @graphql-codegen/cli @graphql-codegen/typescript @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo @graphql-codegen/typescript-apollo-client-helpers
-
 </span></span></foreignObject></svg></code></pre>
 <p>Add graphql-codegen configuration: <code>/graphql-training/web/codegen.yml</code>:</p>
 <pre><code class="language-yaml"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-attr">overwrite:</span> <span class="hljs-literal">true</span>
@@ -498,7 +389,9 @@ COPY . .
       <span class="hljs-bullet">-</span> <span class="hljs-string">typescript-react-apollo</span>
       <span class="hljs-bullet">-</span> <span class="hljs-string">typescript-apollo-client-helpers</span>
 </span></span></foreignObject></svg></code></pre>
-<p>Move listing query to own file <code>/graphql-training/web/operations/todo/list.graphql</code>:</p>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="26" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+<p>Create <code>/graphql-training/web/src/operations/todo/list.graphql</code> for listing query:</p>
 <pre><code class="language-graphql"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>query Todos {
   todos {
     id
@@ -507,14 +400,12 @@ COPY . .
 }
 </span></span></foreignObject></svg></code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="28" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="27" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <p>Change <code>/graphql-training/web/package.json</code>:</p>
 <pre><code class="language-json"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>{
+  <span class="hljs-comment">// Leave other options as they were</span>
   <span class="hljs-attr">&quot;scripts&quot;</span>: {
-    <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;react-scripts start&quot;</span>,
-    <span class="hljs-attr">&quot;build&quot;</span>: <span class="hljs-string">&quot;react-scripts build&quot;</span>,
-    <span class="hljs-attr">&quot;test&quot;</span>: <span class="hljs-string">&quot;react-scripts test&quot;</span>,
-    <span class="hljs-attr">&quot;eject&quot;</span>: <span class="hljs-string">&quot;react-scripts eject&quot;</span>,
+    <span class="hljs-comment">// Leave other scripts as they were</span>
     <span class="hljs-attr">&quot;generate&quot;</span>: <span class="hljs-string">&quot;graphql-codegen&quot;</span>,
     <span class="hljs-attr">&quot;generate:watch&quot;</span>: <span class="hljs-string">&quot;graphql-codegen --watch&quot;</span>
   }
@@ -526,6 +417,8 @@ COPY . .
 <pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>yarn generate
 </span></span></foreignObject></svg></code></pre>
 <p>This generates the types and hooks automatically based on what the API responds. (That's why the API must be running.) Now we can use the generated types and hooks directly in the components!</p>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="28" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <p>Modify <code>/graphql-training/web/src/components/Todo/Todo.tsx</code>:</p>
 <pre><code class="language-typescript"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
 <span class="hljs-keyword">import</span> { useTodosQuery } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../../types/generated-types-and-hooks&#x27;</span>;
@@ -550,6 +443,40 @@ COPY . .
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Todo;
 </span></span></foreignObject></svg></code></pre>
 </section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="29" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+<h1>Bonus: Using Marp to create slides</h1>
+<blockquote>
+<p>Context: <code>/graphql-training</code></p>
+</blockquote>
+<pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>mkdir slides
+cd slides
+yarn init
+yarn add --dev @marp-team/marp-cli
+</span></span></foreignObject></svg></code></pre>
+<p>Modify <code>/graphql-training/slides/package.json</code>:</p>
+<pre><code class="language-json"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>{
+  <span class="hljs-comment">// Leave other options as they were</span>
+  <span class="hljs-attr">&quot;scripts&quot;</span>: {
+    <span class="hljs-attr">&quot;slides&quot;</span>: <span class="hljs-string">&quot;marp &#x27;../README.md&#x27; -o slides.html&quot;</span>,
+    <span class="hljs-attr">&quot;slides:watch&quot;</span>: <span class="hljs-string">&quot;marp &#x27;../README.md&#x27; -o slides.html --watch&quot;</span>
+  }
+}
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="30" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+<p>Add the following in the beginning of <code>/graphql-training/README.md</code>:</p>
+<pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>---
+marp: true
+theme: default
+class: invert
+---
+</span></span></foreignObject></svg></code></pre>
+<blockquote>
+<p>Context: <code>/graphql-training/slides</code></p>
+</blockquote>
+<pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>yarn slides
+</span></span></foreignObject></svg></code></pre>
+</section>
 <script>!function(){"use strict";const t="marpitSVGPolyfill:setZoomFactor,",e=Symbol();let r,o;function n(n){const i="object"==typeof n&&n.target||document,a="object"==typeof n?n.zoom:n;window[e]||(Object.defineProperty(window,e,{configurable:!0,value:!0}),window.addEventListener("message",(({data:e,origin:r})=>{if(r===window.origin)try{if(e&&"string"==typeof e&&e.startsWith(t)){const[,t]=e.split(","),r=Number.parseFloat(t);Number.isNaN(r)||(o=r)}}catch(t){console.error(t)}})));let l=!1;Array.from(i.querySelectorAll("svg[data-marpit-svg]"),(t=>{var e,n,i,s;t.style.transform||(t.style.transform="translateZ(0)");const c=a||o||t.currentScale||1;r!==c&&(r=c,l=c);const d=t.getBoundingClientRect(),{length:u}=t.children;for(let r=0;r<u;r+=1){const o=t.children[r],a=o.getScreenCTM();if(a){const t=null!==(n=null===(e=o.x)||void 0===e?void 0:e.baseVal.value)&&void 0!==n?n:0,r=null!==(s=null===(i=o.y)||void 0===i?void 0:i.baseVal.value)&&void 0!==s?s:0,l=o.firstChild,{style:u}=l;u.transformOrigin||(u.transformOrigin=`${-t}px ${-r}px`),u.transform=`scale(${c}) matrix(${a.a}, ${a.b}, ${a.c}, ${a.d}, ${a.e-d.left}, ${a.f-d.top}) translateZ(0.0001px)`}}})),!1!==l&&Array.from(i.querySelectorAll("iframe"),(({contentWindow:e})=>{null==e||e.postMessage(`${t}${l}`,"null"===window.origin?"*":window.origin)}))}r=1,o=void 0;const i=(t,e,r)=>{if(t.getAttribute(e)!==r)return t.setAttribute(e,r),!0};function a({once:t=!1,target:e=document}={}){const r="Apple Computer, Inc."===navigator.vendor?[n]:[];let o=!t;const a=()=>{for(const t of r)t({target:e});!function(t=document){Array.from(t.querySelectorAll('svg[data-marp-fitting="svg"]'),(t=>{var e;const r=t.firstChild,o=r.firstChild,{scrollWidth:n,scrollHeight:a}=o;let l,s=1;if(t.hasAttribute("data-marp-fitting-code")&&(l=null===(e=t.parentElement)||void 0===e?void 0:e.parentElement),t.hasAttribute("data-marp-fitting-math")&&(l=t.parentElement),l){const t=getComputedStyle(l),e=Math.ceil(l.clientWidth-parseFloat(t.paddingLeft||"0")-parseFloat(t.paddingRight||"0"));e&&(s=e)}const c=Math.max(n,s),d=Math.max(a,1),u=`0 0 ${c} ${d}`;i(r,"width",`${c}`),i(r,"height",`${d}`),i(t,"preserveAspectRatio",getComputedStyle(t).getPropertyValue("--preserve-aspect-ratio")||"xMinYMin meet"),i(t,"viewBox",u)&&t.classList.toggle("__reflow__")}))}(e),o&&window.requestAnimationFrame(a)};return a(),()=>{o=!1}}const l=Symbol(),s=document.currentScript;((t=document)=>{if("undefined"==typeof window)throw new Error("Marp Core's browser script is valid only in browser context.");if(t[l])return t[l];const e=a({target:t}),r=()=>{e(),delete t[l]};Object.defineProperty(t,l,{configurable:!0,value:r})})(s?s.getRootNode():document)}();
 </script></foreignObject></svg></div><script>!function(){"use strict";var e=function(e,t){var n,r=1===(e.parent||e).nodeType?e.parent||e:document.querySelector(e.parent||e),s=[].filter.call("string"==typeof e.slides?r.querySelectorAll(e.slides):e.slides||r.children,(function(e){return"SCRIPT"!==e.nodeName})),a={},i=function(e,t){return(t=t||{}).index=s.indexOf(e),t.slide=e,t},o=function(e,t){a[e]=(a[e]||[]).filter((function(e){return e!==t}))},l=function(e,t){return(a[e]||[]).reduce((function(e,n){return e&&!1!==n(t)}),!0)},c=function(e,t){s[e]&&(n&&l("deactivate",i(n,t)),n=s[e],l("activate",i(n,t)))},d=function(e,t){var r=s.indexOf(n)+e;l(e>0?"next":"prev",i(n,t))&&c(r,t)},u={off:o,on:function(e,t){return(a[e]||(a[e]=[])).push(t),o.bind(null,e,t)},fire:l,slide:function(e,t){if(!arguments.length)return s.indexOf(n);l("slide",i(s[e],t))&&c(e,t)},next:d.bind(null,1),prev:d.bind(null,-1),parent:r,slides:s,destroy:function(e){l("destroy",i(n,e)),a={}}};return(t||[]).forEach((function(e){e(u)})),n||c(0),u};function t(e){e.parent.classList.add("bespoke-marp-parent"),e.slides.forEach((e=>e.classList.add("bespoke-marp-slide"))),e.on("activate",(t=>{const n=t.slide,r=!n.classList.contains("bespoke-marp-active");e.slides.forEach((e=>{e.classList.remove("bespoke-marp-active"),e.setAttribute("aria-hidden","true")})),n.classList.add("bespoke-marp-active"),n.removeAttribute("aria-hidden"),r&&(n.classList.add("bespoke-marp-active-ready"),document.body.clientHeight,n.classList.remove("bespoke-marp-active-ready"))}))}function n(e){let t=0,n=0;Object.defineProperty(e,"fragments",{enumerable:!0,value:e.slides.map((e=>[null,...e.querySelectorAll("[data-marpit-fragment]")]))});const r=r=>void 0!==e.fragments[t][n+r],s=(r,s)=>{t=r,n=s,e.fragments.forEach(((e,t)=>{e.forEach(((e,n)=>{if(null==e)return;const a=t<r||t===r&&n<=s;e.setAttribute("data-bespoke-marp-fragment",a?"active":"inactive"),t===r&&n===s?e.setAttribute("data-bespoke-marp-current-fragment","current"):e.removeAttribute("data-bespoke-marp-current-fragment")}))})),e.fragmentIndex=s;const a={slide:e.slides[r],index:r,fragments:e.fragments[r],fragmentIndex:s};e.fire("fragment",a)};e.on("next",(({fragment:a=!0})=>{if(a){if(r(1))return s(t,n+1),!1;const a=t+1;e.fragments[a]&&s(a,0)}else{const r=e.fragments[t].length;if(n+1<r)return s(t,r-1),!1;const a=e.fragments[t+1];a&&s(t+1,a.length-1)}})),e.on("prev",(({fragment:a=!0})=>{if(r(-1)&&a)return s(t,n-1),!1;const i=t-1;e.fragments[i]&&s(i,e.fragments[i].length-1)})),e.on("slide",(({index:t,fragment:n})=>{let r=0;if(void 0!==n){const s=e.fragments[t];if(s){const{length:e}=s;r=-1===n?e-1:Math.min(Math.max(n,0),e-1)}}s(t,r)})),s(0,0)}
 /*!
@@ -571,4 +498,4 @@ INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
 LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */function _(e,t,n,r){return new(n||(n=Promise))((function(s,a){function i(e){try{l(r.next(e))}catch(e){a(e)}}function o(e){try{l(r.throw(e))}catch(e){a(e)}}function l(e){var t;e.done?s(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,o)}l((r=r.apply(e,t||[])).next())}))}const G=()=>(void 0===H&&(H="wakeLock"in navigator&&navigator.wakeLock),H),Q=()=>_(void 0,void 0,void 0,(function*(){const e=G();if(e)try{const t=yield e.request("screen");return t.addEventListener("release",(()=>{console.debug("[Marp CLI] Wake Lock was released")})),console.debug("[Marp CLI] Wake Lock is active"),t}catch(e){console.warn(e)}return null}));function Z(){return _(this,void 0,void 0,(function*(){if(!G())return;let e;const t=()=>{e&&"visible"===document.visibilityState&&Q()};return document.addEventListener("visibilitychange",t),document.addEventListener("fullscreenchange",t),e=yield Q(),e}))}const ee=[p.Normal,p.Presenter,p.Next];!function(r=document.getElementById("p")){document.body.setAttribute(m,(()=>{switch(v("view")){case"next":return p.Next;case"presenter":return p.Presenter;default:return p.Normal}})());const s=(e=>{const t=v(e);return b({[e]:void 0}),t})("sync")||void 0,o=!1,d=!0,f=e(r,((...e)=>{const t=ee.findIndex((e=>g()===e));if(t<0)throw new Error("Invalid view");return e.map((([e,n])=>e[t]&&n)).filter((e=>e))})([[d,d,o],W({key:s})],[[d,d,d],X(r)],[[d,d,o],l],[[d,d,d],t],[[d,o,o],i()],[[d,d,d],c],[[d,d,d],z({history:!1})],[[d,d,o],u()],[[d,d,o],a],[[d,o,o],Y],[[d,d,o],J()],[[d,o,o],y()],[[d,d,d],n],[[d,d,o],Z]));window.addEventListener("beforeunload",(()=>b({sync:f.syncKey}))),window.addEventListener("unload",(()=>f.destroy()))}()}();</script><script>window.__marpCliWatchWS="ws://localhost:37717/0e55a6bd18dfa8dbfe3a3f4a2e6360e43d8d0f1c6e4d35b9974b5adacfdd92fe";!function(){"use strict";const e=(n,o=!1)=>{const t=new WebSocket(n);return t.addEventListener("open",(()=>{console.info("[Marp CLI] Observing the change of file..."),o&&location.reload()})),t.addEventListener("close",(()=>{console.warn("[Marp CLI] WebSocket for file watcher was disconnected. Try re-connecting in 5000ms..."),setTimeout((()=>e(n,!0)),5e3)})),t.addEventListener("message",(e=>{"reload"===e.data&&location.reload()})),t};!function(){const n=window.__marpCliWatchWS;if(n)e(n)}()}();</script></body></html>
+***************************************************************************** */function _(e,t,n,r){return new(n||(n=Promise))((function(s,a){function i(e){try{l(r.next(e))}catch(e){a(e)}}function o(e){try{l(r.throw(e))}catch(e){a(e)}}function l(e){var t;e.done?s(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,o)}l((r=r.apply(e,t||[])).next())}))}const G=()=>(void 0===H&&(H="wakeLock"in navigator&&navigator.wakeLock),H),Q=()=>_(void 0,void 0,void 0,(function*(){const e=G();if(e)try{const t=yield e.request("screen");return t.addEventListener("release",(()=>{console.debug("[Marp CLI] Wake Lock was released")})),console.debug("[Marp CLI] Wake Lock is active"),t}catch(e){console.warn(e)}return null}));function Z(){return _(this,void 0,void 0,(function*(){if(!G())return;let e;const t=()=>{e&&"visible"===document.visibilityState&&Q()};return document.addEventListener("visibilitychange",t),document.addEventListener("fullscreenchange",t),e=yield Q(),e}))}const ee=[p.Normal,p.Presenter,p.Next];!function(r=document.getElementById("p")){document.body.setAttribute(m,(()=>{switch(v("view")){case"next":return p.Next;case"presenter":return p.Presenter;default:return p.Normal}})());const s=(e=>{const t=v(e);return b({[e]:void 0}),t})("sync")||void 0,o=!1,d=!0,f=e(r,((...e)=>{const t=ee.findIndex((e=>g()===e));if(t<0)throw new Error("Invalid view");return e.map((([e,n])=>e[t]&&n)).filter((e=>e))})([[d,d,o],W({key:s})],[[d,d,d],X(r)],[[d,d,o],l],[[d,d,d],t],[[d,o,o],i()],[[d,d,d],c],[[d,d,d],z({history:!1})],[[d,d,o],u()],[[d,d,o],a],[[d,o,o],Y],[[d,d,o],J()],[[d,o,o],y()],[[d,d,d],n],[[d,d,o],Z]));window.addEventListener("beforeunload",(()=>b({sync:f.syncKey}))),window.addEventListener("unload",(()=>f.destroy()))}()}();</script></body></html>
