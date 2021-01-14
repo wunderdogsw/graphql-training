@@ -28,6 +28,8 @@ services:
       - ./api:/usr/src/app
     ports:
       - '8000:8000'
+    depends_on:
+      - db
   db:
     image: postgres:13-alpine
     restart: always
