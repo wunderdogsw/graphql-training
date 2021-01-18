@@ -9,6 +9,7 @@ services:
       REACT_APP_LOCAL: local
     volumes:
       - ./web:/usr/src/app
+      - ./api/src/schema.graphql:/usr/src/api/src/schema.graphql
     ports:
       - '3000:3000'
     depends_on:

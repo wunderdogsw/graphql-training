@@ -1,5 +1,5 @@
 overwrite: true
-schema: http://localhost:8000/graphql
+schema: ../api/src/schema.graphql
 documents: src/operations/**/*.graphql
 generates:
   src/types/generated-types-and-hooks.ts:
