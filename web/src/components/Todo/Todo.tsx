@@ -1,21 +1,12 @@
-import React from 'react';
-import { useTodosQuery } from '../../types/generated-types-and-hooks';
+import React from "react";
+import AddTodo from "./AddTodo";
+import TodoList from "./TodoList";
 
-const Todo: React.FC = () => {
-  const { loading, error, data } = useTodosQuery();
-
-  if (loading) return <p>Loading...</p>;
-  if (error || !data?.todos) return <p>Error!</p>;
-
-  return (
-    <ul>
-      {data.todos.map(({ id, description }) => (
-        <li key={id}>
-          Item {id}: {description}
-        </li>
-      ))}
-    </ul>
-  );
-};
+const Todo: React.FC = () => (
+  <>
+    <AddTodo />
+    <TodoList />
+  </>
+);
 
 export default Todo;
