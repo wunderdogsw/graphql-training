@@ -209,7 +209,7 @@ export class AppModule {}
 
 > Context: `/graphql-training && docker-compose up -d`
 
-Open browser to access playground: http://localhost:3000/graphql
+Open browser to access playground: http://localhost:8000/graphql
 
 ```graphql
 query {
