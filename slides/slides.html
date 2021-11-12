@@ -153,17 +153,17 @@ docker-compose down
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="14" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <h2>Configure GraphQL in NestJS (code-first)</h2>
 <p>Modify <code>/graphql-training/api/src/app.module.ts</code></p>
-<pre><code class="language-typescript"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">import</span> { Module } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span>;
-<span class="hljs-keyword">import</span> { GraphQLModule } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/graphql&#x27;</span>;
-<span class="hljs-keyword">import</span> { join } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;path&#x27;</span>;
-<span class="hljs-keyword">import</span> { TodoModule } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./todo/todo.module&#x27;</span>;
-<span class="hljs-keyword">import</span> { AppController } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./app.controller&#x27;</span>;
-<span class="hljs-keyword">import</span> { AppService } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./app.service&#x27;</span>;
+<pre><code class="language-typescript"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">import</span> { Module } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@nestjs/common&quot;</span>;
+<span class="hljs-keyword">import</span> { GraphQLModule } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@nestjs/graphql&quot;</span>;
+<span class="hljs-keyword">import</span> { join } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;path&quot;</span>;
+<span class="hljs-keyword">import</span> { TodoModule } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./todo/todo.module&quot;</span>;
+<span class="hljs-keyword">import</span> { AppController } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./app.controller&quot;</span>;
+<span class="hljs-keyword">import</span> { AppService } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./app.service&quot;</span>;
 
 <span class="hljs-meta">@Module</span>({
   <span class="hljs-attr">imports</span>: [
     GraphQLModule.forRoot({
-      <span class="hljs-attr">autoSchemaFile</span>: join(process.cwd(), <span class="hljs-string">&#x27;src/schema.graphql&#x27;</span>),
+      <span class="hljs-attr">autoSchemaFile</span>: join(process.cwd(), <span class="hljs-string">&quot;src/schema.graphql&quot;</span>),
       <span class="hljs-attr">playground</span>: <span class="hljs-literal">true</span>,
     }),
     TodoModule,
@@ -215,9 +215,7 @@ docker-compose down
 </blockquote>
 <p>Create mutation:</p>
 <pre><code class="language-graphql"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>mutation {
-  createTodo(createTodoInput: {
-    description: &quot;Create todo&quot;
-  }) {
+  createTodo(createTodoInput: { description: &quot;Create todo&quot; }) {
     id
     description
   }
@@ -234,7 +232,7 @@ docker-compose down
 <p>Query all:</p>
 <pre><code class="language-graphql"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>query {
   todos {
-    id 
+    id
     description
   }
 }
@@ -260,11 +258,11 @@ docker-compose down
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="20" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <h3>Add PostgreSQL database: Add ORM configuration</h3>
 <p>Add <code>/graphql-training/api/ormconfig.ts</code>:</p>
-<pre><code class="language-typescript"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">import</span> { join } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;path&#x27;</span>;
-<span class="hljs-keyword">import</span> { TypeOrmModuleOptions } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/typeorm&#x27;</span>;
+<pre><code class="language-typescript"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">import</span> { join } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;path&quot;</span>;
+<span class="hljs-keyword">import</span> { TypeOrmModuleOptions } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@nestjs/typeorm&quot;</span>;
 
 <span class="hljs-keyword">const</span> config: TypeOrmModuleOptions = {
-  <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;postgres&#x27;</span>,
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;postgres&quot;</span>,
   <span class="hljs-attr">host</span>: process.env.POSTGRES_HOST,
   <span class="hljs-attr">port</span>: <span class="hljs-built_in">Number</span>(process.env.POSTGRES_PORT),
   <span class="hljs-attr">database</span>: process.env.POSTGRES_DB,
@@ -272,9 +270,9 @@ docker-compose down
   <span class="hljs-attr">password</span>: process.env.POSTGRES_PASSWORD,
   <span class="hljs-attr">synchronize</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">logging</span>: <span class="hljs-literal">false</span>,
-  <span class="hljs-attr">entities</span>: [join(__dirname, <span class="hljs-string">&#x27;**&#x27;</span>, <span class="hljs-string">&#x27;*.entity.{ts,js}&#x27;</span>)],
-  <span class="hljs-attr">migrations</span>: [join(__dirname, <span class="hljs-string">&#x27;**&#x27;</span>, <span class="hljs-string">&#x27;*.migration.{ts,js}&#x27;</span>)],
-  <span class="hljs-attr">subscribers</span>: [join(__dirname, <span class="hljs-string">&#x27;**&#x27;</span>, <span class="hljs-string">&#x27;*.subscriber.{ts,js}&#x27;</span>)],
+  <span class="hljs-attr">entities</span>: [join(__dirname, <span class="hljs-string">&quot;**&quot;</span>, <span class="hljs-string">&quot;*.entity.{ts,js}&quot;</span>)],
+  <span class="hljs-attr">migrations</span>: [join(__dirname, <span class="hljs-string">&quot;**&quot;</span>, <span class="hljs-string">&quot;*.migration.{ts,js}&quot;</span>)],
+  <span class="hljs-attr">subscribers</span>: [join(__dirname, <span class="hljs-string">&quot;**&quot;</span>, <span class="hljs-string">&quot;*.subscriber.{ts,js}&quot;</span>)],
 };
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> config;
@@ -330,8 +328,8 @@ docker-compose down
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="25" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <p>Create <code>/graphql-training/web/src/components/Todo/Todo.tsx</code></p>
-<pre><code class="language-typescript"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
-<span class="hljs-keyword">import</span> { useQuery, gql } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@apollo/client&#x27;</span>;
+<pre><code class="language-typescript"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+<span class="hljs-keyword">import</span> { useQuery, gql } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@apollo/client&quot;</span>;
 
 <span class="hljs-keyword">type</span> TodoItem = {
   <span class="hljs-attr">id</span>: <span class="hljs-built_in">number</span>;
@@ -369,15 +367,14 @@ docker-compose down
 };
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Todo;
-
 </span></span></foreignObject></svg></code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="26" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <p>Change <code>/graphql-training/web/src/App.tsx</code>:</p>
-<pre><code class="language-typescript"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">import</span> { ApolloProvider } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@apollo/client&#x27;</span>;
-<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
-<span class="hljs-keyword">import</span> { client } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./client&#x27;</span>;
-<span class="hljs-keyword">import</span> Todo <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./components/Todo/Todo&#x27;</span>;
+<pre><code class="language-typescript"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">import</span> { ApolloProvider } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@apollo/client&quot;</span>;
+<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+<span class="hljs-keyword">import</span> { client } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./client&quot;</span>;
+<span class="hljs-keyword">import</span> Todo <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./components/Todo/Todo&quot;</span>;
 
 <span class="hljs-keyword">const</span> App: React.FC = <span class="hljs-function">() =&gt;</span> (
   <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ApolloProvider</span> <span class="hljs-attr">client</span>=<span class="hljs-string">{client}</span>&gt;</span>
@@ -438,8 +435,8 @@ docker-compose down
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="30" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <p>Modify <code>/graphql-training/web/src/components/Todo/Todo.tsx</code>:</p>
-<pre><code class="language-typescript"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
-<span class="hljs-keyword">import</span> { useTodosQuery } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../../types/generated-types-and-hooks&#x27;</span>;
+<pre><code class="language-typescript"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+<span class="hljs-keyword">import</span> { useTodosQuery } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../../types/generated-types-and-hooks&quot;</span>;
 
 <span class="hljs-keyword">const</span> Todo: React.FC = <span class="hljs-function">() =&gt;</span> {
   <span class="hljs-keyword">const</span> { loading, error, data } = useTodosQuery();
@@ -464,7 +461,7 @@ docker-compose down
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="31" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <h2>Add monorepo magic</h2>
 <p>The last, definitely optional, step that we will take to <a href="https://graphql-code-generator.com/docs/getting-started/development-workflow">improve the development flow</a> is to automatically update the frontend types when the backend types change.</p>
-<p>Modify the schema in  <code>/graphql-training/web/codegen.yml</code>:</p>
+<p>Modify the schema in <code>/graphql-training/web/codegen.yml</code>:</p>
 <pre><code class="language-yaml"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-attr">schema:</span> <span class="hljs-string">../api/src/schema.graphql</span>
 </span></span></foreignObject></svg></code></pre>
 </section>
@@ -530,9 +527,55 @@ web_1  | [1] Compiled successfully!
 <p>Congratulations! You have just implemented an API and a client that have types synced. Additionally the API provides validation out of the box and is well documented.</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="37" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
-<h1>Bonus: Using Marp to create slides</h1>
+<h1>Cypress testing</h1>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="38" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+<h2>Install Cypress</h2>
+<p>Prerequisites: <a href="https://docs.cypress.io/guides/getting-started/installing-cypress">https://docs.cypress.io/guides/getting-started/installing-cypress</a></p>
+<blockquote>
+<p>Context: <code>/graphql-training/web</code></p>
+</blockquote>
+<p>Install Cypress</p>
+<pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>yarn add --dev cypress
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="39" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+<h2>Configure Cypress</h2>
+<p>Configure Cypress and run it locally</p>
+<pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>yarn run cypress open
+</span></span></foreignObject></svg></code></pre>
+<p>This will create the following folders with some default contents</p>
+<pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>/cypress/fixtures
+/cypress/integration
+/cypress/plugins
+/cypress/support
+</span></span></foreignObject></svg></code></pre>
+<p>and then opens a browser window that lets you run the new default tests.</p>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="40" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+<h2>Configure Typescript</h2>
+<p>New versions of Cypress ship with Typescript built in.</p>
+<p>All you need to do is:</p>
+<ul>
+<li>change filenames from <code>*.js</code> to <code>*.ts</code></li>
+<li>add custom command interfaces to Cypress namespace</li>
+</ul>
+<p>For example <code>/web/cypress/support/commands.ts</code>:</p>
+<pre><code class="language-typescript"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap><span class="hljs-keyword">declare</span> <span class="hljs-keyword">namespace</span> Cypress {
+  <span class="hljs-keyword">interface</span> Chainable&lt;Subject&gt; {
+    selectItem(selector: <span class="hljs-built_in">string</span>): Chainable&lt;Subject&gt;;
+  }
+}
+
+Cypress.Commands.add(<span class="hljs-string">&quot;selectItem&quot;</span>, <span class="hljs-function">(<span class="hljs-params">selector, ...args</span>) =&gt;</span>
+  cy.get(<span class="hljs-string">`[data-test=<span class="hljs-subst">${selector}</span>]`</span>, ...args)
+);
+</span></span></foreignObject></svg></code></pre>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="41" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+<h1>Bonus: Using Marp to create slides</h1>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="42" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <blockquote>
 <p>Context: <code>/graphql-training</code></p>
 </blockquote>
@@ -551,7 +594,7 @@ yarn add --dev @marp-team/marp-cli
 }
 </span></span></foreignObject></svg></code></pre>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="39" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="43" data-class="invert" data-theme="default" class="invert" style="--class:invert;--theme:default;">
 <p>Add the following in the beginning of <code>/graphql-training/README.md</code>:</p>
 <pre><code class="language-plaintext"><svg data-marp-fitting="svg" data-marp-fitting-code><foreignObject><span data-marp-fitting-svg-content><span data-marp-fitting-svg-content-wrap>---
 marp: true
@@ -586,4 +629,4 @@ INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
 LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */function _(e,t,n,r){return new(n||(n=Promise))((function(s,a){function i(e){try{l(r.next(e))}catch(e){a(e)}}function o(e){try{l(r.throw(e))}catch(e){a(e)}}function l(e){var t;e.done?s(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,o)}l((r=r.apply(e,t||[])).next())}))}const G=()=>(void 0===H&&(H="wakeLock"in navigator&&navigator.wakeLock),H),Q=()=>_(void 0,void 0,void 0,(function*(){const e=G();if(e)try{const t=yield e.request("screen");return t.addEventListener("release",(()=>{console.debug("[Marp CLI] Wake Lock was released")})),console.debug("[Marp CLI] Wake Lock is active"),t}catch(e){console.warn(e)}return null}));function Z(){return _(this,void 0,void 0,(function*(){if(!G())return;let e;const t=()=>{e&&"visible"===document.visibilityState&&Q()};return document.addEventListener("visibilitychange",t),document.addEventListener("fullscreenchange",t),e=yield Q(),e}))}const ee=[p.Normal,p.Presenter,p.Next];!function(r=document.getElementById("p")){document.body.setAttribute(m,(()=>{switch(v("view")){case"next":return p.Next;case"presenter":return p.Presenter;default:return p.Normal}})());const s=(e=>{const t=v(e);return b({[e]:void 0}),t})("sync")||void 0,o=!1,d=!0,f=e(r,((...e)=>{const t=ee.findIndex((e=>g()===e));if(t<0)throw new Error("Invalid view");return e.map((([e,n])=>e[t]&&n)).filter((e=>e))})([[d,d,o],W({key:s})],[[d,d,d],X(r)],[[d,d,o],l],[[d,d,d],t],[[d,o,o],i()],[[d,d,d],c],[[d,d,d],z({history:!1})],[[d,d,o],u()],[[d,d,o],a],[[d,o,o],Y],[[d,d,o],J()],[[d,o,o],y()],[[d,d,d],n],[[d,d,o],Z]));window.addEventListener("beforeunload",(()=>b({sync:f.syncKey}))),window.addEventListener("unload",(()=>f.destroy()))}()}();</script></body></html>
+***************************************************************************** */function _(e,t,n,r){return new(n||(n=Promise))((function(s,a){function i(e){try{l(r.next(e))}catch(e){a(e)}}function o(e){try{l(r.throw(e))}catch(e){a(e)}}function l(e){var t;e.done?s(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(i,o)}l((r=r.apply(e,t||[])).next())}))}const G=()=>(void 0===H&&(H="wakeLock"in navigator&&navigator.wakeLock),H),Q=()=>_(void 0,void 0,void 0,(function*(){const e=G();if(e)try{const t=yield e.request("screen");return t.addEventListener("release",(()=>{console.debug("[Marp CLI] Wake Lock was released")})),console.debug("[Marp CLI] Wake Lock is active"),t}catch(e){console.warn(e)}return null}));function Z(){return _(this,void 0,void 0,(function*(){if(!G())return;let e;const t=()=>{e&&"visible"===document.visibilityState&&Q()};return document.addEventListener("visibilitychange",t),document.addEventListener("fullscreenchange",t),e=yield Q(),e}))}const ee=[p.Normal,p.Presenter,p.Next];!function(r=document.getElementById("p")){document.body.setAttribute(m,(()=>{switch(v("view")){case"next":return p.Next;case"presenter":return p.Presenter;default:return p.Normal}})());const s=(e=>{const t=v(e);return b({[e]:void 0}),t})("sync")||void 0,o=!1,d=!0,f=e(r,((...e)=>{const t=ee.findIndex((e=>g()===e));if(t<0)throw new Error("Invalid view");return e.map((([e,n])=>e[t]&&n)).filter((e=>e))})([[d,d,o],W({key:s})],[[d,d,d],X(r)],[[d,d,o],l],[[d,d,d],t],[[d,o,o],i()],[[d,d,d],c],[[d,d,d],z({history:!1})],[[d,d,o],u()],[[d,d,o],a],[[d,o,o],Y],[[d,d,o],J()],[[d,o,o],y()],[[d,d,d],n],[[d,d,o],Z]));window.addEventListener("beforeunload",(()=>b({sync:f.syncKey}))),window.addEventListener("unload",(()=>f.destroy()))}()}();</script><script>window.__marpCliWatchWS="ws://localhost:37717/0e55a6bd18dfa8dbfe3a3f4a2e6360e43d8d0f1c6e4d35b9974b5adacfdd92fe";!function(){"use strict";const e=(n,o=!1)=>{const t=new WebSocket(n);return t.addEventListener("open",(()=>{console.info("[Marp CLI] Observing the change of file..."),o&&location.reload()})),t.addEventListener("close",(()=>{console.warn("[Marp CLI] WebSocket for file watcher was disconnected. Try re-connecting in 5000ms..."),setTimeout((()=>e(n,!0)),5e3)})),t.addEventListener("message",(e=>{"reload"===e.data&&location.reload()})),t};!function(){const n=window.__marpCliWatchWS;if(n)e(n)}()}();</script></body></html>

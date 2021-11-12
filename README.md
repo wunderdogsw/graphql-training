@@ -120,7 +120,6 @@ Create a web app using [CRA][cra]:
 yarn create react-app web --template typescript
 ```
 
-
 ---
 
 Use the configuration provided in `docker-compose.yml` to start the API, the web app and the DB:
@@ -136,10 +135,10 @@ Check that the API works at http://localhost:8000
 
 Check that the web app works at http://localhost:3000
 
-Feel free to also check that the DB works at http://localhost:5432 
-
+Feel free to also check that the DB works at http://localhost:5432
 
 Troubleshooting and shutdown:
+
 ```plaintext
 docker ps
 docker-compose logs api
@@ -147,6 +146,7 @@ docker-compose logs web
 docker-compose logs db
 docker-compose down
 ```
+
 ---
 
 # API
@@ -172,6 +172,7 @@ Add resources related to a todo entity:
 ```plaintext
 nest generate resource todo
 ```
+
 - Choose `GraphQL (code first)`
 - Choose `Y` for CRUD
 
@@ -182,17 +183,17 @@ nest generate resource todo
 Modify `/graphql-training/api/src/app.module.ts`
 
 ```typescript
-import { Module } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
-import { join } from 'path';
-import { TodoModule } from './todo/todo.module';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Module } from "@nestjs/common";
+import { GraphQLModule } from "@nestjs/graphql";
+import { join } from "path";
+import { TodoModule } from "./todo/todo.module";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
 
 @Module({
   imports: [
     GraphQLModule.forRoot({
-      autoSchemaFile: join(process.cwd(), 'src/schema.graphql'),
+      autoSchemaFile: join(process.cwd(), "src/schema.graphql"),
       playground: true,
     }),
     TodoModule,
@@ -228,6 +229,7 @@ This will result in an error, since the default resolver is not ready (and also 
 > Context: `/graphql-training && docker-compose up -d`
 
 Make changes:
+
 - `/src/todo/dto/create-todo.input.ts`
 - `/src/todo/dto/update-todo.input.ts`
 - `/src/todo/entities/todo.entity.ts`
@@ -235,14 +237,13 @@ Make changes:
 - `/src/todo/todo.service.ts`
 
 Observe that:
--  `/src/schema.graphql` is automatically updated (code first configuration)
+
+- `/src/schema.graphql` is automatically updated (code first configuration)
 - the documentation is available in the playground
 
 See commit: [API: Update todo models and service to return sane results][1]
 
 [1]: https://github.com/wunderdogsw/graphql-training/pull/1/commits/5e40ee33c0b744726aef6163670c54720ca43bcc
-
-
 
 ---
 
@@ -254,9 +255,7 @@ Create mutation:
 
 ```graphql
 mutation {
-  createTodo(createTodoInput: {
-    description: "Create todo"
-  }) {
+  createTodo(createTodoInput: { description: "Create todo" }) {
     id
     description
   }
@@ -269,12 +268,12 @@ mutation {
 
 > Context: `/graphql-training && docker-compose up -d`
 
-Query all: 
+Query all:
 
 ```graphql
 query {
   todos {
-    id 
+    id
     description
   }
 }
@@ -290,8 +289,8 @@ query {
 yarn add @nestjs/typeorm typeorm pg
 ```
 
-
 TypeORM requires some changes to `/graphql-training/api/tsconfig.json`:
+
 ```json
 {
   "compilerOptions": {
@@ -309,11 +308,11 @@ TypeORM requires some changes to `/graphql-training/api/tsconfig.json`:
 Add `/graphql-training/api/ormconfig.ts`:
 
 ```typescript
-import { join } from 'path';
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { join } from "path";
+import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 
 const config: TypeOrmModuleOptions = {
-  type: 'postgres',
+  type: "postgres",
   host: process.env.POSTGRES_HOST,
   port: Number(process.env.POSTGRES_PORT),
   database: process.env.POSTGRES_DB,
@@ -321,9 +320,9 @@ const config: TypeOrmModuleOptions = {
   password: process.env.POSTGRES_PASSWORD,
   synchronize: true,
   logging: false,
-  entities: [join(__dirname, '**', '*.entity.{ts,js}')],
-  migrations: [join(__dirname, '**', '*.migration.{ts,js}')],
-  subscribers: [join(__dirname, '**', '*.subscriber.{ts,js}')],
+  entities: [join(__dirname, "**", "*.entity.{ts,js}")],
+  migrations: [join(__dirname, "**", "*.migration.{ts,js}")],
+  subscribers: [join(__dirname, "**", "*.subscriber.{ts,js}")],
 };
 
 export default config;
@@ -336,6 +335,7 @@ export default config;
 > Context: `/graphql-training/api/src`
 
 Make changes:
+
 - `/app.module.ts`: add TypeORM configuration
 - `/todo/entities/todo.entity.ts`: add TypeORM decorators
 - `/todo/todo.module.ts`: Todo configuration
@@ -359,9 +359,8 @@ Feel free to check data in DB to check that everything is configured properly at
 
 Check that the web app works at http://localhost:3000
 
-
-
 - clean up generated code at will
+
 ---
 
 ## Install GraphQL and Apollo Client
@@ -384,11 +383,12 @@ export const client = new ApolloClient({
 ```
 
 ---
+
 Create `/graphql-training/web/src/components/Todo/Todo.tsx`
 
 ```typescript
-import React from 'react';
-import { useQuery, gql } from '@apollo/client';
+import React from "react";
+import { useQuery, gql } from "@apollo/client";
 
 type TodoItem = {
   id: number;
@@ -426,17 +426,17 @@ const Todo: React.FC = () => {
 };
 
 export default Todo;
-
 ```
+
 ---
 
 Change `/graphql-training/web/src/App.tsx`:
 
 ```typescript
-import { ApolloProvider } from '@apollo/client';
-import React from 'react';
-import { client } from './client';
-import Todo from './components/Todo/Todo';
+import { ApolloProvider } from "@apollo/client";
+import React from "react";
+import { client } from "./client";
+import Todo from "./components/Todo/Todo";
 
 const App: React.FC = () => (
   <ApolloProvider client={client}>
@@ -484,9 +484,11 @@ query Todos {
   }
 }
 ```
+
 ---
 
 Change `/graphql-training/web/package.json`:
+
 ```json
 {
   "Leave other options": "as they were",
@@ -511,8 +513,8 @@ This generates the types and hooks automatically based on what the API responds.
 Modify `/graphql-training/web/src/components/Todo/Todo.tsx`:
 
 ```typescript
-import React from 'react';
-import { useTodosQuery } from '../../types/generated-types-and-hooks';
+import React from "react";
+import { useTodosQuery } from "../../types/generated-types-and-hooks";
 
 const Todo: React.FC = () => {
   const { loading, error, data } = useTodosQuery();
@@ -542,7 +544,7 @@ The last, definitely optional, step that we will take to [improve the developmen
 
 [devflow]: https://graphql-code-generator.com/docs/getting-started/development-workflow
 
-Modify the schema in  `/graphql-training/web/codegen.yml`:
+Modify the schema in `/graphql-training/web/codegen.yml`:
 
 ```yaml
 schema: ../api/src/schema.graphql
@@ -557,6 +559,7 @@ yarn add --dev concurrently
 ```
 
 Change `/graphql-training/web/package.json`:
+
 ```json
 {
   "Leave other options": "as they were",
@@ -569,7 +572,7 @@ Change `/graphql-training/web/package.json`:
 
 ---
 
-Make sure `graphql-codegen` can access the API schema by changing `/graphql-training/docker-compose.yml`: 
+Make sure `graphql-codegen` can access the API schema by changing `/graphql-training/docker-compose.yml`:
 
 ```yaml
 services:
@@ -614,6 +617,70 @@ web_1  | [1] Compiled successfully!
 ```
 
 Congratulations! You have just implemented an API and a client that have types synced. Additionally the API provides validation out of the box and is well documented.
+
+---
+
+# Cypress testing
+
+---
+
+## Install Cypress
+
+Prerequisites: https://docs.cypress.io/guides/getting-started/installing-cypress
+
+> Context: `/graphql-training/web`
+
+Install Cypress
+
+```plaintext
+yarn add --dev cypress
+```
+
+---
+
+## Configure Cypress
+
+Configure Cypress and run it locally
+
+```plaintext
+yarn run cypress open
+```
+
+This will create the following folders with some default contents
+
+```plaintext
+/cypress/fixtures
+/cypress/integration
+/cypress/plugins
+/cypress/support
+```
+
+and then opens a browser window that lets you run the new default tests.
+
+---
+
+## Configure Typescript
+
+New versions of Cypress ship with Typescript built in.
+
+All you need to do is:
+
+- change filenames from `*.js` to `*.ts`
+- add custom command interfaces to Cypress namespace
+
+For example `/web/cypress/support/commands.ts`:
+
+```typescript
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    selectItem(selector: string): Chainable<Subject>;
+  }
+}
+
+Cypress.Commands.add("selectItem", (selector, ...args) =>
+  cy.get(`[data-test=${selector}]`, ...args)
+);
+```
 
 ---
 
