@@ -23,3 +23,14 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+// Extends existing Cypress namespace
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    selectItem(selector: string): Chainable<Subject>;
+  }
+}
+
+Cypress.Commands.add("selectItem", (selector, ...args) =>
+  cy.get(`[data-test=${selector}]`, ...args)
+);

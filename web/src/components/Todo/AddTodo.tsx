@@ -11,6 +11,8 @@ const AddTodo: React.FC = () => {
         input: { description },
       },
     });
+
+    setDescription("");
   };
 
   return (
