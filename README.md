@@ -659,6 +659,31 @@ and then opens a browser window that lets you run the new default tests.
 
 ---
 
+## Configure Typescript
+
+New versions of Cypress ship with Typescript built in.
+
+All you need to do is:
+
+- change filenames from `*.js` to `*.ts`
+- add custom command interfaces to Cypress namespace
+
+For example `/web/cypress/support/commands.ts`:
+
+```typescript
+declare namespace Cypress {
+  interface Chainable<Subject> {
+    selectItem(selector: string): Chainable<Subject>;
+  }
+}
+
+Cypress.Commands.add("selectItem", (selector, ...args) =>
+  cy.get(`[data-test=${selector}]`, ...args)
+);
+```
+
+---
+
 # Bonus: Using Marp to create slides
 
 ---
