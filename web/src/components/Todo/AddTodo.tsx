@@ -20,8 +20,11 @@ const AddTodo: React.FC = () => {
         name="description"
         value={description}
         onChange={({ target }) => setDescription(target.value)}
+        data-test="set-description"
       />
-      <button onClick={handleAddTodo}>Add todo</button>
+      <button onClick={handleAddTodo} data-test="create-todo">
+        Add todo
+      </button>
     </div>
   );
 };

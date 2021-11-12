@@ -12,11 +12,11 @@ const TodoList: React.FC = () => {
 
   return (
     <div style={{ flex: 1, padding: 16 }}>
-      <button onClick={handleReload}>Reload</button>
+      <button onClick={handleReload} data-test="reload-todos">Reload</button>
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <ul>
+        <ul data-test="todo-list">
           {data?.todos.map(({ id, description }) => (
             <li key={id}>
               Item {id}: {description}
